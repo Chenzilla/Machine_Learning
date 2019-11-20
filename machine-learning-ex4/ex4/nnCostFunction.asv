@@ -55,7 +55,7 @@ for i = 1:num_labels
     end
 end
 
-J = 1/m * sum(sum((-y_t .* log(a3) - ((1 - y_t) .* log(1 - a3)))));
+J = 1/m *(-y * log(a3) - (1 - y)
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
 %         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
