@@ -41,17 +41,17 @@ Theta2_grad = zeros(size(Theta2));
 %         computed in ex4.m
 %
 X_t = [ones(m, 1), X];
-z2 = X_t * Theta1';
+z2 = Theta1 * X_t';
 a2 = sigmoid(z2);
 
-a2 = [ones(m, 1), a2];
-z3 = a2 * Theta2';
+a2 = [ones(1, m); a2];
+z3 = Theta2 * a2;
 a3 = sigmoid(z3); % aka h(X)
 
-y_t = zeros(m, num_labels);
-for i = 1:num_labels
+y_t = zeros(num_labels, m);
+for i = 1:m
     for j = 1:num_labels
-        y_t(i, j) = y(i) == j;
+        y_t(j, i) = y(i) == j;
     end
 end
 
