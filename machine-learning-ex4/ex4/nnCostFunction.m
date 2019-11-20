@@ -56,6 +56,7 @@ for i = 1:m
 end
 
 J = 1/m * sum(sum((-y_t .* log(a3) - ((1 - y_t) .* log(1 - a3)))));
+
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
 %         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
@@ -71,6 +72,8 @@ J = 1/m * sum(sum((-y_t .* log(a3) - ((1 - y_t) .* log(1 - a3)))));
 %               over the training examples if you are implementing it for the 
 %               first time.
 %
+
+
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for
@@ -78,8 +81,10 @@ J = 1/m * sum(sum((-y_t .* log(a3) - ((1 - y_t) .* log(1 - a3)))));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
-
-
+Theta1_sq = Theta1 .^ 2;
+Theta2_sq = Theta2 .^ 2;
+J = J + lambda/(2*m) * (sum(sum((Theta1_sq(:, 2:input_layer_size + 1)))) ...
+    + sum(sum(Theta2_sq(:, 2:hidden_layer_size + 1))));
 
 
 
