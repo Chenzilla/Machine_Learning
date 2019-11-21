@@ -71,7 +71,17 @@ J = 1/m * sum(sum((-y_t .* log(a3) - ((1 - y_t) .* log(1 - a3)))));
 %               over the training examples if you are implementing it for the 
 %               first time.
 %
+d3 = a3 - y_t;
+d2 = (Theta2(:, 2:end)' * d3) .* sigmoidGradient(z2);
 
+Delta2 = zeros(num_labels, hidden_layer_size);
+Delta1 = zeros(hidden_layer_size, input_layer_size);
+
+Delta2 = d3 * a2';
+Delta1 = d2 * X_t;
+
+Theta1_grad = Delta1/m;
+Theta2_grad = Delta2/m;
 
 % Part 3: Implement regularization with the cost function and gradients.
 %
