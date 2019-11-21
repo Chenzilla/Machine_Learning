@@ -95,21 +95,8 @@ Theta2_sq = Theta2 .^ 2;
 J = J + lambda/(2*m) * (sum(sum((Theta1_sq(:, 2:input_layer_size + 1)))) ...
     + sum(sum(Theta2_sq(:, 2:hidden_layer_size + 1))));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Theta1_grad(:, 2:end) = Theta1_grad(:, 2:end) + Theta1(:, 2:end) * (lambda/m);
+Theta2_grad(:, 2:end) = Theta2_grad(:, 2:end) + Theta2(:, 2:end) * (lambda/m);
 
 % -------------------------------------------------------------
 
