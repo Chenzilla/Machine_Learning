@@ -164,7 +164,7 @@ pause;
 %  lambda to see how the fit and learning curve change.
 %
 
-lambda = 0;
+lambda = 3;
 [theta] = trainLinearReg(X_poly, y, lambda);
 
 % Plot training data and fit
@@ -214,6 +214,31 @@ fprintf('lambda\t\tTrain Error\tValidation Error\n');
 for i = 1:length(lambda_vec)
 	fprintf(' %f\t%f\t%f\n', ...
             lambda_vec(i), error_train(i), error_val(i));
+end
+
+fprintf('Program paused. Press enter to continue.\n');
+pause;
+
+%% =========== Part 9: Plotting random subsets =============
+%  Plot random subsets of 50 on X to see if average error is same
+%  for training and cross validation 
+
+lambda = 0;
+[error_train, error_val] = ...
+    randomLearningCurve([ones(m, 1) X], y, ...
+                  [ones(size(Xval, 1), 1) Xval], yval, ...
+                  lambda);
+
+plot(1:m, error_train, 1:m, error_val);
+title('Randomly selected learning curve for linear regression')
+legend('Train', 'Cross Validation')
+xlabel('Number of training examples')
+ylabel('Error')
+axis([0 13 0 150])
+
+fprintf('# Training Examples\tTrain Error\tCross Validation Error\n');
+for i = 1:m
+    fprintf('  \t%d\t\t%f\t%f\n', i, error_train(i), error_val(i));
 end
 
 fprintf('Program paused. Press enter to continue.\n');
